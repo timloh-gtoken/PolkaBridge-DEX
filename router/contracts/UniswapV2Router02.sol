@@ -293,14 +293,15 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         amounts = UniswapV2Library.getAmountsOut(factory, amountIn, path);
         require(amounts[amounts.length - 1] >= amountOutMin, 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT');
         TransferHelper.safeTransferFrom(
-            path[0],
-            msg.sender,
-            UniswapV2Library.pairFor(factory, path[0], path[1]),
-            amounts[0].mul(998).div(1000)
+            path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
         );
-        TransferHelper.safeTransferFrom(path[0], msg.sender, feeWallet, amounts[0].mul(16).div(10000));
-        TransferHelper.safeTransferFrom(path[0], msg.sender, devWallet, amounts[0].mul(4).div(10000));
+        /** TransferHelper.safeTransferFrom(
+            path[0], msg.sender, feeWallet, amounts[0].mul(16).div(10000)
+        ); */
         _swap(amounts, path, to);
+        TransferHelper.safeTransferFrom(
+            path[0], address(this), devWallet, amounts[0].mul(4).div(10000)
+        );
     }
 
     function swapTokensForExactTokens(
@@ -313,14 +314,15 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         amounts = UniswapV2Library.getAmountsIn(factory, amountOut, path);
         require(amounts[0] <= amountInMax, 'UniswapV2Router: EXCESSIVE_INPUT_AMOUNT');
         TransferHelper.safeTransferFrom(
-            path[0],
-            msg.sender,
-            UniswapV2Library.pairFor(factory, path[0], path[1]),
-            amounts[0].mul(998).div(1000)
+            path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
         );
-        TransferHelper.safeTransferFrom(path[0], msg.sender, feeWallet, amounts[0].mul(16).div(10000));
-        TransferHelper.safeTransferFrom(path[0], msg.sender, devWallet, amounts[0].mul(4).div(10000));
+        /** TransferHelper.safeTransferFrom(
+            path[0], msg.sender, feeWallet, amounts[0].mul(16).div(10000)
+        ); */
         _swap(amounts, path, to);
+        TransferHelper.safeTransferFrom(
+            path[0], address(this), devWallet, amounts[0].mul(4).div(10000)
+        );
     }
 
     function swapExactETHForTokens(
