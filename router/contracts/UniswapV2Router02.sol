@@ -15,9 +15,9 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     address public immutable override factory;
     address public immutable override WETH;
     address public owner;
-    address public feeWallet;
-    address public devWallet;
-    modifier ensure(uint256 deadline) {
+    // Polka Treasury
+    address polkaTreasury;
+    modifier ensure(uint deadline) {
         require(deadline >= block.timestamp, 'UniswapV2Router: EXPIRED');
         _;
     }
@@ -25,10 +25,11 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         require(msg.sender == owner, 'Only Owner');
         _;
     }
-
-    constructor(address _factory, address _WETH) public {
+    constructor(address _factory, address _WETH, address _treasury) public {
+        require(_treasury != address(0), "Router: Treasury contract address can not be zero");
         factory = _factory;
         WETH = _WETH;
+        polkaTreasury = _treasury;
         owner = msg.sender;
     }
 
@@ -39,15 +40,6 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
     function transferOwnership(address _new_owner) public onlyOwner {
         owner = _new_owner;
     }
-
-    function setFeeWallet(address _fee_addr) public onlyOwner {
-        feeWallet = _fee_addr;
-    }
-
-    function setDevWallet(address _dev_addr) public onlyOwner {
-        devWallet = _dev_addr;
-    }
-
     // **** ADD LIQUIDITY ****
     function _addLiquidity(
         address tokenA,
@@ -275,10 +267,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
                 : (amountOut, uint256(0));
             address to = i < path.length - 2 ? UniswapV2Library.pairFor(factory, output, path[i + 2]) : _to;
             IUniswapV2Pair(UniswapV2Library.pairFor(factory, input, output)).swap(
-                amount0Out,
-                amount1Out,
-                to,
-                new bytes(0)
+                amount0Out, amount1Out, to, polkaTreasury
             );
         }
     }
@@ -295,9 +284,12 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         TransferHelper.safeTransferFrom(
             path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
         );
+<<<<<<< HEAD
         /** TransferHelper.safeTransferFrom(
             path[0], msg.sender, feeWallet, amounts[0].mul(16).div(10000)
         ); */
+=======
+>>>>>>> 5ab181f6423c972c19fd97bc5535009f59037aea
         _swap(amounts, path, to);
         TransferHelper.safeTransferFrom(
             path[0], address(this), devWallet, amounts[0].mul(4).div(10000)
@@ -316,9 +308,12 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         TransferHelper.safeTransferFrom(
             path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
         );
+<<<<<<< HEAD
         /** TransferHelper.safeTransferFrom(
             path[0], msg.sender, feeWallet, amounts[0].mul(16).div(10000)
         ); */
+=======
+>>>>>>> 5ab181f6423c972c19fd97bc5535009f59037aea
         _swap(amounts, path, to);
         TransferHelper.safeTransferFrom(
             path[0], address(this), devWallet, amounts[0].mul(4).div(10000)
@@ -419,7 +414,7 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
                 ? (uint256(0), amountOutput)
                 : (amountOutput, uint256(0));
             address to = i < path.length - 2 ? UniswapV2Library.pairFor(factory, output, path[i + 2]) : _to;
-            pair.swap(amount0Out, amount1Out, to, new bytes(0));
+            pair.swap(amount0Out, amount1Out, to, polkaTreasury);
         }
     }
 
@@ -526,5 +521,11 @@ contract UniswapV2Router02 is IUniswapV2Router02 {
         returns (uint256[] memory amounts)
     {
         return UniswapV2Library.getAmountsIn(factory, amountOut, path);
+    }
+
+    // Set Polka Treasury Address
+    function setPolkaTreasury(address _new_treasury) public onlyOwner {
+        require(_new_treasury != address(0), "Router: Treasury contract address can not be zero");
+        polkaTreasury = _new_treasury;
     }
 }
