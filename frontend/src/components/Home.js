@@ -141,20 +141,14 @@ const Home = ({ connectWallet, loadTokens, account: { currentNetwork } }) => {
 
       if (isMetaMaskInstalled()) {
         const networkId = await getCurrentNetworkId();
-
-        if (!supportedNetworks.includes(networkId.toString())) {
-          // alert(
-          //   "This network is not supported yet! Please switch to Ethereum or Smart Chain network"
-          // );
+        if (!supportedNetworks.includes(networkId.toString())) {       
         }
         network = getCurrentNetwork(networkId.toString());
-        // alert(`current network set to  ${network}` )
         store.dispatch({
           type: CHANGE_NETWORK,
           payload: network,
         });
       } else {
-        // alert('meta mask not installed')
         network = etheriumNetwork;
       }
 

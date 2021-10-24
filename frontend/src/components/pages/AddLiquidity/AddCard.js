@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       paddingLeft: 0,
       paddingRight: 0,
-      width: "100%",
+      width: "95%",
     },
   },
   cardContents: {
@@ -102,6 +102,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginTop: 0,
     marginBottom: 2,
+    [theme.breakpoints.down("sm")]: {
+      paddingTop:3,
+    },
   },
   settingIcon: {
     color: "#f6f6f6",
@@ -145,6 +148,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginTop: 10,
     marginBottom: 10,
+    [theme.breakpoints.down("sm")]: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-evenly",
+    },
   },
   feeSelectContainer: {
     width: 140,
@@ -814,7 +822,7 @@ const AddCard = (props) => {
           />
 
           {selectedToken1.symbol && selectedToken2.symbol ? (
-            <div style={{ width: "95%" }}>
+            <div style={{ width: "95%"}}>
               <div className={classes.cardSubHeading}>
                 <span className={classes.hintStyle}>Prices and Pool share</span>
               </div>

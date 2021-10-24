@@ -14,6 +14,9 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   tabs: {
     paddingTop: 10,
+    [theme.breakpoints.down("sm")]: {
+    
+    },
   },
   default_tabStyle: {
     color: "rgba(255, 255, 255, 0.5)",

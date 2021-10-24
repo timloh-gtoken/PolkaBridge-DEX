@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       paddingLeft: 0,
       paddingRight: 0,
-      width: "100%",
+      width: "95%",
     },
   },
   cardContents: {
@@ -252,6 +252,17 @@ const useStyles = makeStyles((theme) => ({
     padding: 15,
     color: "#bdbdbd",
     fontSize: 13,
+  },
+  priceContainerBottom:{
+    width: "95%",
+    padding: 15,
+    color: "#bdbdbd",
+    fontSize: 13,
+    [theme.breakpoints.down("sm")]: {
+      height:120,
+      width:300,
+      marginRight:10,
+    },
   },
   spinner: {
     color: "#E0077D",
@@ -726,7 +737,7 @@ const RemoveCard = ({
 
       <div className="mt-4 mb-5">
         <Card elevation={20} className={classes.card}>
-          <div className={classes.priceContainer}>
+          <div className={classes.priceContainerBottom}>
             {false ? (
               <div className="d-flex justify-content-center pt-2 pb-2">
                 <CircularProgress className={classes.spinner} size={30} />
@@ -739,7 +750,7 @@ const RemoveCard = ({
                   </div>
                 </div>
 
-                <div className="d-flex justify-content-between my-2">
+                <div className="d-flex justify-content-between my-2 ">
                   <div>
                     <img
                       className={classes.tokenIcon}

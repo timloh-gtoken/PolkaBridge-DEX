@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "flex-start",
     alignItems: "center",
+    
   },
   footer: {
     width: "100vw",
