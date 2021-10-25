@@ -13,34 +13,14 @@ import {
 import { formattedPercent } from "../../../utils/timeUtils";
 import { useAllTokenData } from "../../../contexts/TokenData";
 import { useAllPairData } from "../../../contexts/PairData";
-// import { formatCurrency } from "../../../utils/helper";
 import Loader from "../../common/Loader";
 import TabPage from "../../TabPage";
 import { formatCurrency } from "../../../utils/formatters";
 import BigNumber from "bignumber.js";
+// import makeStyles from "@material-ui/core/styles/makeStyles";
 
-// globalData ->
-// {
-//   "id": "0xA1853078D1447C0060c71a672E6D13882f61A0a6",
-//   "totalVolumeUSD": "25990.233499252762817",
-//   "totalVolumeETH": "7.425780999786503662",
-//   "untrackedVolumeUSD": "28387.02699820012448427415396166343",
-//   "totalLiquidityUSD": 113078.18050507178,
-//   "totalLiquidityETH": "32.30805157287764869",
-//   "txCount": "59",
-//   "pairCount": 5,
-//   "__typename": "PolkabridgeAmmFactory",
-//   "oneDayVolumeUSD": 437.8250777427784,
-//   "oneWeekVolume": 2611.150077742779,
-//   "weeklyVolumeChange": -85.87440846623471,
-//   "volumeChangeUSD": 0,
-//   "liquidityChangeUSD": 5.726158284194191,
-//   "oneDayTxns": 2,
-//   "txnChange": 0
-// }
 const Analytics = () => {
   const classes = useStyles();
-
   const allPairs = useAllPairData();
   const allTokens = useAllTokenData();
   const transactions = useGlobalTransactions();
@@ -52,7 +32,7 @@ const Analytics = () => {
     console.log("analyticsTest:  globalData load ", globalData);
   }, [globalData]);
   return (
-    <div>
+    <div className={classes.responsive}>
       <div className="mb-3">
         <TabPage data={2} />
       </div>

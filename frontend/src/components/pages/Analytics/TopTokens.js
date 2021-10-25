@@ -142,7 +142,7 @@ const useHeadStyles = makeStyles((theme) => ({
     padding: 0,
     [theme.breakpoints.down("sm")]: {
       fontSize: 12,
-      width: 80,
+      width: "80%",
     },
   },
   sortIcons: {
@@ -314,15 +314,11 @@ const useStyles = makeStyles((theme) => ({
   },
   tableMobile: {
     [theme.breakpoints.up("sm")]: {
-      display: "none",
+      // display: "none",
     },
   },
-  tokenIcon: {
-    // marginRight: 7,
-  },
+  tokenIcon: {},
 }));
-// tableTypes:  "TopTokens" , "TopPools", "Transactions"
-// const rows = topTokensData;
 
 const TopTokens = ({
   tableType = "TopTokens",
@@ -337,23 +333,6 @@ const TopTokens = ({
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  // const [transactions, setTransactions] = useState([]);
-  // const [pairs, setPairs] = useState([]);
-  // const [tokens, setTokens] = useState([]);
-
-  // useEffect(() => {
-  //   if (!allTransactions) {
-  //     return;
-  //   }
-  //   console.log("raw transactions list ", allTransactions);
-  // }, [Object.keys(!allTransactions ? {} : allTransactions)]);
-
-  // id: 1,
-  // token0: {id, name, symbol,... },
-  // fee: 0.3,
-  // tvl: 572.82,
-  // vol_24_h: 882.93,
-  // vol_7_d: 882.93,
   const getFormattedPoolObject = (rawObject) => {
     const _formtattedObj = {
       id: rawObject.id,
@@ -403,15 +382,6 @@ const TopTokens = ({
     );
   }, [allTokens]);
 
-  // id: 1,
-  // transactionType: "swap",
-  // fromToken: { symbol: "ETH", amount: 1.0003 },
-  // toTokenL: { symbol: "PBR", amount: 42021 },
-  // token1_amount
-  // token2_amount
-  // total_value: 20000,
-  // account: "0x9d1599C943AaDb3c0A1964d159113dF913E08f64",
-  // time: "2 minutes ago",
   const getFormattedTransactionObject = (rawObject) => {
     const obj = {
       id: rawObject.transaction.id,
@@ -445,15 +415,6 @@ const TopTokens = ({
     setOrderBy(property);
   };
 
-  // const handleSelectAllClick = (event) => {
-  //   if (event.target.checked) {
-  //     const newSelecteds = rows(tableType).map((n) => n.name);
-  //     setSelected(newSelecteds);
-  //     return;
-  //   }
-  //   setSelected([]);
-  // };
-
   const handleClick = (event, name) => {
     console.log("row clicked...", name);
   };
@@ -470,8 +431,6 @@ const TopTokens = ({
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows = 0;
-  // rowsPerPage -
-  // Math.min(rowsPerPage, rows(tableType).length - page * rowsPerPage);
 
   const rows = (tableType) => {
     switch (tableType) {

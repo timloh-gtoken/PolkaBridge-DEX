@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
   },
+
   card: {
     width: 470,
     minHeight: 300,
@@ -19,13 +20,12 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 10,
     paddingTop: 15,
     paddingBottom: 15,
-
     [theme.breakpoints.down("sm")]: {
       paddingLeft: 10,
       paddingRight: 10,
       paddingTop: 15,
       paddingBottom: 15,
-      width: "92vw",
+      width: "93vw",
       height: "100%",
     },
   },
@@ -134,20 +134,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 13,
     },
   },
-  // statPercentageGreen: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   color: "#4caf50",
-  // },
-  // statPercentageRed: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   color: "#ff1744",
-  // },
-  // arrowIcon: {
-  //   margin: 0,
-  //   padding: 0,
-  // },
+
   tokenListHeading: {
     width: "100%",
     color: "#bdbdbd",
@@ -159,7 +146,6 @@ const useStyles = makeStyles((theme) => ({
   },
   tokenList: {
     width: "100%",
-
     [theme.breakpoints.down("sm")]: {
       width: "100%",
     },
